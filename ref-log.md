@@ -1,31 +1,75 @@
-# Reflection Log: Multi-Agent Travel Planner
+# Reference Log
 
-## What I Learned from Implementing a Multi-Agent Workflow
+## Libraries and Frameworks
 
-Implementing this multi-agent travel planning system taught me the power of separation of concerns in AI applications. By dividing responsibilities between a Planner Agent (creative ideation) and a Reviewer Agent (factual validation), I created a workflow that mirrors real-world collaborative processes. The key insight was that each agent could specialize: the Planner leverages its broad knowledge to generate comprehensive itineraries without internet access, while the Reviewer uses the `internet_search` tool to verify facts and catch errors.
+### Core Technologies
 
-I learned that effective agent orchestration requires clear handoffs—the Planner's structured output becomes the Reviewer's input, and the Delta List mechanism provides transparent change tracking. This asynchronous collaboration pattern is scalable: the agents don't need to "talk" directly; they communicate through well-structured data formats (Markdown itineraries and explicit correction lists).
+1. **Streamlit** (v1.36+)
+   - Purpose: Web application framework for building the chat interface
+   - Documentation: https://docs.streamlit.io/
+   - Usage: Main UI framework, file upload, chat interface components
 
-## Challenges Faced and How I Addressed Them
+2. **LangChain** (v0.2.15)
+   - Purpose: Framework for building RAG pipeline
+   - Documentation: https://python.langchain.com/docs/
+   - Usage: Document processing, text splitting, conversational retrieval chain
+   - Specific modules used:
+     - `langchain.text_splitter.RecursiveCharacterTextSplitter`
+     - `langchain.chains.ConversationalRetrievalChain`
+     - `langchain.memory.ConversationBufferMemory`
 
-The primary challenge was crafting system prompts that produced reliable, consistent outputs. Initially, the Planner generated vague itineraries without specific times or costs. I addressed this by adding explicit formatting instructions and example structures in the prompt. For the Reviewer, I had to balance thoroughness with efficiency—encouraging targeted searches rather than exhaustive verification of every detail.
+3. **LangChain OpenAI** (v0.1.23)
+   - Purpose: OpenAI integration for LangChain
+   - Documentation: https://python.langchain.com/docs/integrations/platforms/openai
+   - Usage: OpenAI embeddings and chat model integration
+   - Components: `OpenAIEmbeddings`, `ChatOpenAI`
 
-Another challenge was tool integration. Ensuring the Reviewer actually used `internet_search` required explicit instructions about when and how to search (e.g., "search for specific, verifiable facts like 'Louvre Museum closing days 2024'"). I also discovered that the Reviewer needed guidance on output format: presenting both the Delta List and the revised itinerary ensures transparency while delivering actionable results.
+4. **LangChain Community** (v0.2.15)
+   - Purpose: Community-contributed LangChain integrations
+   - Documentation: https://python.langchain.com/docs/integrations/vectorstores/chroma
+   - Usage: ChromaDB vector store integration
 
-## Creative Ideas and Design Choices
+5. **ChromaDB**
+   - Purpose: Vector database for storing and retrieving document embeddings
+   - Documentation: https://docs.trychroma.com/
+   - Usage: Persistent vector storage, similarity search
 
-I designed the Planner with a "budget consciousness" directive, asking it to track cumulative expenses and leave a 10-15% buffer. This makes itineraries more realistic. For the Reviewer, I introduced the "Delta List" concept—a structured changelog inspired by version control systems—to make validation transparent and educational for users.
+6. **PyPDF**
+   - Purpose: PDF file processing
+   - Documentation: https://pypdf.readthedocs.io/
+   - Usage: Extracting text content from PDF files
 
-I also emphasized role-appropriate constraints: the Planner works "offline" from existing knowledge, while the Reviewer is explicitly empowered with internet access. This division prevents the Planner from hallucinating facts while allowing the Reviewer to catch those hallucinations.
+7. **OpenAI API** (v1.14)
+   - Purpose: Language model and embeddings provider
+   - Documentation: https://platform.openai.com/docs/
+   - Models used:
+     - `gpt-3.5-turbo`: For generating conversational responses
+     - `text-embedding-ada-002`: For creating document embeddings
 
-One persona decision was framing the Reviewer as "meticulous" but "constructive"—it should improve plans, not just criticize them. This tone engineering encourages helpful feedback rather than purely negative critique.
-
-## External Tools and GenAI Assistance Used
-
-I used Claude Code (Anthropic's AI assistant) to help structure the system prompts and debug the tool integration. Specifically, Claude helped me identify that the `tools` parameter needed to be a list containing the `internet_search` function object, not just a string reference.
-
-I also referenced the Tavily API documentation to understand search result formatting and used GitHub Copilot for minor syntax suggestions in the markdown formatting examples within the prompts.
+8. **python-dotenv**
+   - Purpose: Environment variable management
+   - Documentation: https://pypi.org/project/python-dotenv/
+   - Usage: Loading API keys from .env file
 
 ---
 
-*Total word count: ~390 words (excluding this note and the external tools section title)*
+## Documentation and Learning Resources
+
+1. **LangChain RAG Tutorial**
+   - URL: https://python.langchain.com/docs/tutorials/rag/
+   - Usage: Understanding RAG pipeline implementation
+
+2. **Streamlit Documentation - Chat Elements**
+   - URL: https://docs.streamlit.io/develop/api-reference/chat
+   - Usage: Implementing chat interface components
+
+3. **ChromaDB Getting Started Guide**
+   - URL: https://docs.trychroma.com/getting-started
+   - Usage: Setting up vector store and persistence
+
+4. **LangChain Text Splitters**
+   - URL: https://python.langchain.com/docs/modules/data_connection/document_transformers/
+   - Usage: Understanding chunking strategies
+
+---
+
