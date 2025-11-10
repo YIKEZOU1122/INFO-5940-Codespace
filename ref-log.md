@@ -25,7 +25,3 @@ One persona decision was framing the Reviewer as "meticulous" but "constructive"
 I used Claude Code (Anthropic's AI assistant) to help structure the system prompts and debug the tool integration. Specifically, Claude helped me identify that the `tools` parameter needed to be a list containing the `internet_search` function object, not just a string reference.
 
 I also referenced the Tavily API documentation to understand search result formatting and used GitHub Copilot for minor syntax suggestions in the markdown formatting examples within the prompts.
-
----
-
-*Total word count: ~390 words (excluding this note and the external tools section title)*
