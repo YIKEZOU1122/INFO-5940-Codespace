@@ -1,12 +1,5 @@
 openai
+openai-agents
 streamlit
-langchain-community
-langchain
-langchain-openai
-langchain-text-splitters
-openpyxl
-beautifulsoup4
-litellm
-chromadb
-pypdf
 python-dotenv
+tavily
